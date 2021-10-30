@@ -1,11 +1,7 @@
-import {
-  match
-} from "./utils/match.js"
-
-// const functions = require("firebase-functions");
+const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
-
+const lib = require("./utils/match");
 
 const admin = require("firebase-admin");
 admin.initializeApp();
@@ -14,7 +10,7 @@ const db = admin.firestore();
 
 const app = express(); // For rest API Calls
 app.use(cors({
-  origin: true
+  origin: true,
 }));
 
 // GET REQUESTS
@@ -26,7 +22,7 @@ app.get("/", async (request, response) => {
     const data = doc.data;
     users.push({
       id,
-      ...data
+      ...data,
     });
   });
 
@@ -35,8 +31,8 @@ app.get("/", async (request, response) => {
 
 app.get("/:id", async (request, response) => {
   const projects = await db.collection("projects").get();
-  const user = db.collection("users").doc(request.params.id).get()
-  matchedProjects = match(user, projects);
+  const user = db.collection("users").doc(request.params.id).get();
+  const matchedProjects = lib.match(user, projects);
 
   response.status(200).send(JSON.stringify(matchedProjects));
 });
@@ -55,3 +51,5 @@ app.delete("/", (request, response) => {
 app.put("/", (request, response) => {
 
 });
+
+exports.user = functions.https.onRequest(app);
