@@ -5,21 +5,24 @@
  * @return {bool} Whether the project is mathched or not
  */
 function match(user, projects) {
-  const data = user.data();
   const matchedProjects = [];
-  projects.forEach((project) => {
-    const projectData = project.data();
+  const data = user.data();
+  projects.forEach((doc) => {
+    const projectId = doc.id;
+    const projectData = doc.data();
+    const project = {projectId, ...projectData};
     let factor = 0;
-    if (matchingLists(data.languages, projectData.languages)) {
+    if (matchingLists(data.languages, project.languages)) {
       factor++;
     }
-    if (matchingHours(data.hours, projectData.hours)) {
+    if (matchingHours(data.hours, project.hours)) {
       factor++;
     }
-    if (matchingLists(data.areas, projectData.areas)) {
+    if (matchingLists(data.tags, project.tags)) {
       factor++;
     }
-    if (factor === 3) matchedProjects.push();
+    if (factor === 3) matchedProjects.push(project);
+    console.log(factor);
   });
   return matchedProjects;
 }
