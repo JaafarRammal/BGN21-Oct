@@ -12,6 +12,26 @@ export default function SwipeableCard() {
             date = {new Date().toISOString().split('T')[0]}
             languages = {['Python','Java','Rust']}
             tags = {['Fullstack','WebApp']}
+            contributors = {[
+                {firstName: "Hello", lastName: "World"},
+                {firstName: "Sam", lastName: "Smith"},
+                {firstName: "Hello", lastName: "World"},
+                {firstName: "Sam", lastName: "Smith"},
+                {firstName: "Hello", lastName: "World"},
+                {firstName: "Sam", lastName: "Smith"},
+                {firstName: "Hello", lastName: "World"},
+                {firstName: "Sam", lastName: "Smith"}
+            ]}
+          learning_outcomes = {[
+              'Web Development',
+              'Collaboration',
+              'Team-building',
+              'Pair-programming',
+              'Scripting',
+              'Database Management'
+          ]}
+            why_join_us = "We're a friendly Team with much to teach and much to learn. +\
+            We'd love to take onboard a mentee to see this project through!"
         />
       </SwiperSlide>
     </Swiper>
