@@ -8,43 +8,25 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import {red} from "@mui/material/colors";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import {AppBar, Button, Chip, Stack, Toolbar, useMediaQuery, useTheme} from "@mui/material";
+import {AppBar, Button, Chip, Stack, Toolbar} from "@mui/material";
 import logo from "../Assets/logo.png";
-import Dialog, {DialogProps} from "@mui/material/Dialog";
+import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import {SelectChangeEvent} from "@mui/material/Select";
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function ProjectCard(props: any) {
     const {title, description, date, languages, tags} = props;
     const [open, setOpen] = React.useState(false);
-    const [fullWidth, setFullWidth] = React.useState(true);
-    const [maxWidth, setMaxWidth] = React.useState<DialogProps["maxWidth"]>("sm");
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
     const handleClose = () => {
-        console.log("close clicked");
         setOpen(false);
-        console.log(open);
-    };
-
-    const handleMaxWidthChange = (event: SelectChangeEvent<typeof maxWidth>) => {
-        setMaxWidth(
-            // @ts-expect-error autofill of arbitrary value is not handled.
-            event.target.value
-        );
-    };
-
-    const handleFullWidthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setFullWidth(event.target.checked);
     };
 
     const Tags = tags.map((tag: string) => {
