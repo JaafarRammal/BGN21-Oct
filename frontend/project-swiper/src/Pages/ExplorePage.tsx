@@ -5,9 +5,6 @@ export default function ExplorePage() {
   return (
     <Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={2}>
       <SwipeableCard />
-      <SwipeableCard />
-      <SwipeableCard />
-      <SwipeableCard />
     </Stack>
   );
 }
