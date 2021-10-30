@@ -5,10 +5,10 @@
  * @return {bool} Whether the project is mathched or not
  */
 function match(user, projects) {
-  const data = user.data;
+  const data = user.data();
   const matchedProjects = [];
   projects.forEach((project) => {
-    const projectData = project.data;
+    const projectData = project.data();
     let factor = 0;
     if (matchingLists(data.languages, projectData.languages)) {
       factor++;

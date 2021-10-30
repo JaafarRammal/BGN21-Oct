@@ -19,7 +19,7 @@ app.get("/", async (request, response) => {
   const users = [];
   snapshot.forEach((doc) => {
     const id = doc.id;
-    const data = doc.data;
+    const data = doc.data();
     users.push({
       id,
       ...data,
