@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import logo from "../Assets/logo.png";
 import { NavbarLinks } from "../Helpers/NavbarLinks";
 import AccountMenu from "./AccountMenu";
+import "./Navbar.css";
 
 export default function Navbar() {
   return (
@@ -34,7 +35,7 @@ export default function Navbar() {
             const link = NavbarLinks[key];
             return (
               <li key={index} className="nav-item">
-                <a className="nav-link" href={link.redirect}>
+                <a className={"nav-link " + (window.location.pathname === link.redirect ? "active underline" : "")} href={link.redirect}>
                   {link.title}
                 </a>
               </li>

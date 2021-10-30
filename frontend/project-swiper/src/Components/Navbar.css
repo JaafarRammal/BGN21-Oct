@@ -1,0 +1,6 @@
+.underline {
+  text-decoration: underline !important;     
+  text-decoration-color: white !important;  
+  text-decoration-thickness: 1.5px !important;
+  text-underline-offset: 4px !important;
+}
