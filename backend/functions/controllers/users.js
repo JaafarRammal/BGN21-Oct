@@ -31,7 +31,7 @@ app.get("/", async (request, response) => {
 
 app.get("/:id", async (request, response) => {
   const projects = await db.collection("projects").get();
-  const user = db.collection("users").doc(request.params.id).get();
+  const user = await db.collection("users").doc(request.params.id).get();
   const matchedProjects = lib.match(user, projects);
 
   response.status(200).send(JSON.stringify(matchedProjects));
