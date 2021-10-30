@@ -52,7 +52,7 @@ export default function Navbar() {
         </Search>
 
         {/* Account */}
-        <div className="nav-item">
+        <div className="nav-item" >
           <AccountMenu />
         </div>
       </div>
