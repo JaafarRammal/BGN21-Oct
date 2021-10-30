@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { Avatar } from "@mui/material";
+import image from "../Assets/logo.png";
+import AccountMenu from "./AccountMenu";
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -26,14 +28,14 @@ export default function Navbar() {
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: "bottom",
+        horizontal: "left",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: "bottom",
+        horizontal: "left",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
@@ -45,10 +47,11 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ background: "#24292F", padding: "10px 0px" }}>
         <Toolbar>
-          <Typography variant="h6" noWrap component="div" sx={{ display: { xs: "block" } }}>
-            Project Swiper
+          <Avatar alt="Remy Sharp" src={image} sx={{ paddingRight: "20px" }} />
+          <Typography variant="h6" noWrap component="div" sx={{ display: { xs: "block" }, cursor: "pointer" }}  onClick={() => {console.log("fuck")}}>
+            Project Noogler
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "flex", md: "flex" } }}>
@@ -57,17 +60,7 @@ export default function Navbar() {
                 <NotificationsIcon />
               </Badge>
             </IconButton> */}
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-            </IconButton>
+            <AccountMenu></AccountMenu>
           </Box>
         </Toolbar>
       </AppBar>
