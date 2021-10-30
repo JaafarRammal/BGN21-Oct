@@ -1,7 +1,7 @@
+const utils = require("./utils/utils.js");
 const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
-const lib = require("./utils/match");
 
 const admin = require("firebase-admin");
 admin.initializeApp();
@@ -18,12 +18,7 @@ app.get("/", async (request, response) => {
   const snapshot = await db.collection("users").get();
   const users = [];
   snapshot.forEach((doc) => {
-    const id = doc.id;
-    const data = doc.data();
-    users.push({
-      id,
-      ...data,
-    });
+    users.push(utils.unpack.unpack(doc));
   });
 
   response.status(200).send(JSON.stringify(users));
@@ -32,7 +27,7 @@ app.get("/", async (request, response) => {
 app.get("/:id", async (request, response) => {
   const projects = await db.collection("projects").get();
   const user = await db.collection("users").doc(request.params.id).get();
-  const matchedProjects = lib.match(user, projects);
+  const matchedProjects = utils.match.match(user, projects);
 
   response.status(200).send(JSON.stringify(matchedProjects));
 });
