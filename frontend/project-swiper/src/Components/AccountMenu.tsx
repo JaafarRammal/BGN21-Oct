@@ -24,7 +24,7 @@ export default function AccountMenu() {
       <Box sx={{ alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-            <Avatar sx={{ height: "40px", width: "40px", margin: "5px -5px 5px 5px" }}>JR</Avatar>
+            <Avatar sx={{ height: "40px", width: "40px", margin: "5px 5px 5px 5px" }}>JR</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -50,7 +50,7 @@ export default function AccountMenu() {
               display: "block",
               position: "absolute",
               top: 0,
-              right: 14,
+              right: 25,
               width: 10,
               height: 10,
               bgcolor: "background.paper",
