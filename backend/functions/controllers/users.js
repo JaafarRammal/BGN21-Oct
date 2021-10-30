@@ -31,7 +31,6 @@ app.put("/like/:id/:projectId", async (request, response) => {
   const user = utils.unpack.unpack(packedUser);
   const project = utils.unpack.unpack(packedProject);
   const updatedLists = utils.like.like(user, project);
-  console.log(updatedLists);
   db.collection("users").doc(user.id).update({
     "likedProjects": updatedLists[0],
   });
