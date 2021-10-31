@@ -7,7 +7,6 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ProjectCard from "../Components/ProjectCard";
-import { Grid } from "@mui/material";
 
 export default function MyProjectsPage() {
   const [loading, setLoading] = useState<Boolean>(true);
