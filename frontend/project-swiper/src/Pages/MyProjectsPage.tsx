@@ -73,6 +73,11 @@ function ProjectsCollapse(props: any) {
               </div>
             );
           })}
+          {Object.keys(projects).length === 0 && (
+            <div className="col-lg-6 text-secondary">
+              No projects to show!
+            </div>
+          )}
         </div>
       </AccordionDetails>
     </Accordion>
