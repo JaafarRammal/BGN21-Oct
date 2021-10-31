@@ -5,8 +5,12 @@ import logo from "../Assets/logo.png";
 import { NavbarLinks } from "../Helpers/NavbarLinks";
 import AccountMenu from "./AccountMenu";
 import "./Navbar.css";
+import { getCurrentUserID, getUser } from "../Helpers/Firebase";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [userInitials, setUserInitials] = useState<string>();
+  getUser(getCurrentUserID()).then((user) => setUserInitials(user.firstName[0] + user.secondName[0]));
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark text-center">
       {/* Title */}
@@ -52,8 +56,8 @@ export default function Navbar() {
         </Search>
 
         {/* Account */}
-        <div className="nav-item" >
-          <AccountMenu />
+        <div className="nav-item">
+          <AccountMenu initials={userInitials?.toUpperCase()} />
         </div>
       </div>
     </nav>

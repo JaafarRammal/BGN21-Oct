@@ -11,7 +11,8 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { NavbarLinks } from "../Helpers/NavbarLinks";
 
-export default function AccountMenu() {
+export default function AccountMenu(props: any) {
+  const { initials } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -25,7 +26,7 @@ export default function AccountMenu() {
       <Box sx={{ alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-            <Avatar sx={{ height: "40px", width: "40px", margin: "5px 5px 5px 5px" }}>JR</Avatar>
+            <Avatar sx={{ height: "40px", width: "40px", margin: "5px 5px 5px 5px" }}>{initials}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
