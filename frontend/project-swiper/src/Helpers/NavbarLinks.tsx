@@ -1,6 +1,6 @@
 import ExplorePage from "../Pages/ExplorePage";
 import MyProjectsPage from "../Pages/MyProjectsPage";
-import UserProfile from "../Pages/UserProfile";
+import UserProfilePage from "../Pages/UserProfilePage";
 
 // Navlink object to abstract the different pages and their link properties
 export interface NavbarLinkObject {
@@ -23,6 +23,6 @@ export const NavbarLinks: { [id: string]: NavbarLinkObject } = {
   },
   myprofile: {
     redirect: "/myprofile",
-    page: UserProfile,
+    page: UserProfilePage,
   },
 };
