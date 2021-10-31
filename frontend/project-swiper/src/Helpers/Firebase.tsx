@@ -30,22 +30,3 @@ export const getProject = function (projectID: string): Promise<Project> {
       .catch((error) => reject(error));
   });
 };
-
-export const getContributors = function (contributor_ids: string[]): Promise<User[]> {
-  return new Promise<User[]>( (resolve, reject) => {
-    // const contributors: User[] = [];
-    const q = query(collection(db, "users"),
-        where('ownedProjects', 'in', contributor_ids));
-    getDocs(q).then((querySnapshot) => {
-      // querySnapshot.forEach((doc) => {
-      //   console.log(doc);
-      //   // doc.data() is never undefined for query doc snapshots
-      //   contributors.push(doc.data() as User);
-      // });
-      const contributors: User[] = querySnapshot.docs.map((doc) => {
-        return doc.data() as User;
-      });
-      resolve(contributors);
-    }).catch((error) => reject(error));
-  })
-}
