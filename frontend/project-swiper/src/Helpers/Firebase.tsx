@@ -1,5 +1,5 @@
 import { db } from "./firebase.config";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, query, where, collection, getDocs } from "firebase/firestore";
 import { User } from "./User";
 import { Project } from "./Project";
 
