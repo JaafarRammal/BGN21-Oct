@@ -9,5 +9,6 @@ export interface Project {
   owner_id: string,
   resources: string[],
   tags: string[],
-  title: string
+  title: string,
+  why_join: string
 }
