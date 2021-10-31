@@ -14,6 +14,7 @@ export default function UserProfilePage() {
 
   return (
     <div>
+      {/* TODO: replace by spinner for loading */}
       {loading && <div>Loading</div>}
       {!loading && <UserProfile user={user} />}
     </div>

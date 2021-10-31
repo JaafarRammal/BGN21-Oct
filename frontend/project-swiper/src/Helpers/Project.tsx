@@ -5,7 +5,7 @@ export interface Project {
   hours: number,
   languages: [string],
   learning_outcomes: [string],
-  liked_by: [string],
+  likedBy: [string],
   owner_id: string,
   resources: [string],
   tags: [string],
