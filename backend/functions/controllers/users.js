@@ -13,16 +13,8 @@ app.use(cors({
   origin: true,
 }));
 
-// GET REQUESTS
-app.get("/", async (request, response) => {
-  const snapshot = await db.collection("users").get();
-  const users = [];
-  snapshot.forEach((doc) => {
-    users.push(utils.unpack.unpack(doc));
-  });
 
-  response.status(200).send(JSON.stringify(users));
-});
+// GET REQUESTS
 
 app.get("/:id", async (request, response) => {
   const projects = await db.collection("projects").get();
@@ -32,19 +24,36 @@ app.get("/:id", async (request, response) => {
   response.status(200).send(JSON.stringify(matchedProjects));
 });
 
-// POST REQUESTS
-app.post("/userprofile/", (request, response) => {
-
+app.put("/like/:id/:projectId", async (request, response) => {
+  const packedUser = await db.collection("users").doc(request.params.id).get();
+  const packedProject = await db.collection("projects")
+      .doc(request.params.projectId).get();
+  const user = utils.unpack.unpack(packedUser);
+  const project = utils.unpack.unpack(packedProject);
+  const updatedLists = utils.like.like(user, project);
+  db.collection("users").doc(user.id).update({
+    "likedProjects": updatedLists[0],
+  });
+  db.collection("projects").doc(project.id).update({
+    "likedBy": updatedLists[1],
+  });
+  response.status(201).send();
 });
 
-// DELETE REQUESTS
-app.delete("/", (request, response) => {
-
-});
-
-// PUT REQUESTS
-app.put("/", (request, response) => {
-
+app.put("/dislike/:id/:projectId", async (request, response) => {
+  const packedUser = await db.collection("users").doc(request.params.id).get();
+  const packedProject = await db.collection("projects")
+      .doc(request.params.projectId).get();
+  const user = utils.unpack.unpack(packedUser);
+  const project = utils.unpack.unpack(packedProject);
+  const updatedLists = utils.like.dislike(user, project);
+  db.collection("users").doc(user.id).update({
+    "likedProjects": updatedLists[0],
+  });
+  db.collection("projects").doc(project.id).update({
+    "likedBy": updatedLists[1],
+  });
+  response.status(201).send();
 });
 
 exports.user = functions.https.onRequest(app);
