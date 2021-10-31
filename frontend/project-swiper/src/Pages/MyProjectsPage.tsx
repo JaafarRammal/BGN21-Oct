@@ -40,9 +40,9 @@ export default function MyProjectsPage() {
   return (
     <div className="container" style={{ paddingTop: "20px" }}>
       <div>
-        <ProjectsCollapse projects={ownedProjects} title="Owned projects" loading={loading} />
-        <ProjectsCollapse projects={joinedProjects} title="Joined projects" loading={loading} />
-        <ProjectsCollapse projects={likedProjects} title="Liked projects" loading={loading} />
+        <ProjectsCollapse projects={ownedProjects} title="Owned" loading={loading} />
+        <ProjectsCollapse projects={joinedProjects} title="Joined" loading={loading} />
+        <ProjectsCollapse projects={likedProjects} title="Liked" loading={loading} />
       </div>
     </div>
   );
