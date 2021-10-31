@@ -72,7 +72,7 @@ function ProjectView(props: any) {
                     </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography variant="h6" component="div">{project.description}</Typography>
+                    <Typography variant="body2">{project.description}</Typography>
                 </AccordionDetails>
             </Accordion>
             <Accordion style={{paddingTop: '25px'}} expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
@@ -86,7 +86,7 @@ function ProjectView(props: any) {
                     </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography variant="h6" component="div">{project.why_join}</Typography>
+                    <Typography variant="body2">{project.why_join}</Typography>
                 </AccordionDetails>
             </Accordion>
             {/*<Card sx={{minWidth: 275}} variant="outlined">*/}
