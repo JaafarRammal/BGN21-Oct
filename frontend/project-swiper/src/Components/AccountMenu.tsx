@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import { NavbarLinks } from "../Helpers/NavbarLinks";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -62,11 +63,12 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            window.location.href = NavbarLinks["myprofile"].redirect;
+          }}
+        >
           <Avatar /> Profile
-        </MenuItem>
-        <MenuItem>
-          <Avatar /> My Projects
         </MenuItem>
         <Divider />
         <MenuItem>

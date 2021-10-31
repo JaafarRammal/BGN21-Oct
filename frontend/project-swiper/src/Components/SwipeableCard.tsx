@@ -9,6 +9,7 @@ enum DIRECTION {
 }
 
 function getDirection(swiperEvent: any): DIRECTION {
+  // TODO: catch exception if library breaks
   const direction = Object.entries(swiperEvent)[60][1];
   switch (direction) {
     case "next":
@@ -54,6 +55,7 @@ export default function SwipeableCard() {
             We'd love to take onboard a mentee to see this project through!"
         />
       </SwiperSlide>
+      {direction}
     </Swiper>
   );
 }
