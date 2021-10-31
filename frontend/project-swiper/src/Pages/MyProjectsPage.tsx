@@ -59,7 +59,7 @@ function ProjectsCollapse(props: any) {
         {!loading && <Typography sx={{ width: "33%", flexShrink: 0, color: "text.secondary" }}>{Object.keys(projects).length} project(s)</Typography>}
         {loading && (
           <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            <div className="spinner-border text-primary spinner-border-sm" role="status"></div>
+            <div className="spinner-grow spinner-grow-sm" role="status"></div>
           </Typography>
         )}
       </AccordionSummary>
@@ -73,6 +73,11 @@ function ProjectsCollapse(props: any) {
               </div>
             );
           })}
+          {Object.keys(projects).length === 0 && (
+            <div className="col-lg-6 text-secondary">
+              No projects to show!
+            </div>
+          )}
         </div>
       </AccordionDetails>
     </Accordion>
