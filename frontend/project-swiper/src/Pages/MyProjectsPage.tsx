@@ -1,26 +1,33 @@
 import { useState } from "react";
 import { getCurrentUserID, getProject, getUser } from "../Helpers/Firebase";
 import { Project } from "../Helpers/Project";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ProjectCard from "../Components/ProjectCard";
+import { Grid } from "@mui/material";
 
 export default function MyProjectsPage() {
   const [loading, setLoading] = useState<Boolean>(true);
-  const [ownedProjects, setOwnedProjects] = useState<Project[]>([]);
-  const [joinedProjects, setJoinedProjects] = useState<Project[]>([]);
-  const [likedProjects, setLikedProjects] = useState<Project[]>([]);
+  const [ownedProjects, setOwnedProjects] = useState<{ [id: string]: Project }>({});
+  const [joinedProjects, setJoinedProjects] = useState<{ [id: string]: Project }>({});
+  const [likedProjects, setLikedProjects] = useState<{ [id: string]: Project }>({});
 
   getUser(getCurrentUserID()).then((data) => {
-    const ownedArray: Project[] = [];
-    const joinedArray: Project[] = [];
-    const likedArray: Project[] = [];
+    const ownedArray: { [id: string]: Project } = {};
+    const joinedArray: { [id: string]: Project } = {};
+    const likedArray: { [id: string]: Project } = {};
     const promises: Promise<any>[] = [];
     data.ownedProjects.forEach((id) => {
-      promises.push(getProject(id).then((project) => ownedArray.push(project)));
+      promises.push(getProject(id).then((project) => (ownedArray[id] = project)));
     });
     data.joinedProjects.forEach((id) => {
-      promises.push(getProject(id).then((project) => joinedArray.push(project)));
+      promises.push(getProject(id).then((project) => (joinedArray[id] = project)));
     });
     data.likedProjects.forEach((id) => {
-      promises.push(getProject(id).then((project) => likedArray.push(project)));
+      promises.push(getProject(id).then((project) => (likedArray[id] = project)));
     });
 
     Promise.all(promises).then((_) => {
@@ -32,13 +39,43 @@ export default function MyProjectsPage() {
   });
 
   return (
-    <div>
-      {loading && <div>Loading...</div>}
-      {!loading && (
-        <div>
-          <div>{ownedProjects.length}</div> <div>{likedProjects.length}</div> <div>{joinedProjects.length}</div>
-        </div>
-      )}
+    <div className="container" style={{ paddingTop: "20px" }}>
+      <div>
+        <ProjectsCollapse projects={ownedProjects} title="Owned projects" loading={loading} />
+        <ProjectsCollapse projects={joinedProjects} title="Joined projects" loading={loading} />
+        <ProjectsCollapse projects={likedProjects} title="Liked projects" loading={loading} />
+      </div>
     </div>
+  );
+}
+
+function ProjectsCollapse(props: any) {
+  const projects: { [id: string]: Project } = props.projects;
+  const title: string = props.title;
+  const loading: Boolean = props.loading;
+  return (
+    <Accordion>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+        <Typography sx={{ width: "33%", flexShrink: 0 }}>{title}</Typography>
+        {!loading && <Typography sx={{ width: "33%", flexShrink: 0, color: "text.secondary" }}>{Object.keys(projects).length} project(s)</Typography>}
+        {loading && (
+          <Typography sx={{ width: "33%", flexShrink: 0 }}>
+            <div className="spinner-border text-primary spinner-border-sm" role="status"></div>
+          </Typography>
+        )}
+      </AccordionSummary>
+      <AccordionDetails>
+        <div className="row">
+          {Object.keys(projects).map((key, index) => {
+            const project = projects[key];
+            return (
+              <div className="col-lg-6">
+                <ProjectCard project={project} key={index} projectid={key} />
+              </div>
+            );
+          })}
+        </div>
+      </AccordionDetails>
+    </Accordion>
   );
 }
