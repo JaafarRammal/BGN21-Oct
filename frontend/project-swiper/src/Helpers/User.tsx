@@ -1,9 +1,11 @@
 export interface User {
   firstName: string,
-  hobbies: [string],
+  hobbies: string[],
   hours: number,
-  languages: [string],
-  likedProjects: [string],
+  languages: string[],
+  likedProjects: string[],
   secondName: string,
-  tags: [string]
+  tags: string[],
+  ownedProjects: string[],
+  joinedProjects: string[]
 }

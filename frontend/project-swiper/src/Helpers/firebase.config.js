@@ -14,7 +14,7 @@ const firebaseConfig = {
   storageBucket: "bgn-hack21-7006.appspot.com",
   messagingSenderId: "574636002510",
   appId: "1:574636002510:web:3b0f2d9f38e7ce1a57949f",
-  measurementId: "G-LEDK1Q3J3E"
+  measurementId: "G-LEDK1Q3J3E",
 };
 
 // Initialize Firebase
