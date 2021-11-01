@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { dislikeProject, getCurrentUserID, getProject } from "../Helpers/Firebase";
 import { Project } from "../Helpers/Project";
-import { Button, Card, CardContent, Grid, Stack, Typography } from "@mui/material";
+import { Avatar, Button, Card, CardContent, Grid, Stack, Typography } from "@mui/material";
 import { User } from "../Helpers/User";
 import AddIcon from "@mui/icons-material/Add";
 import Accordion from "@mui/material/Accordion";
@@ -162,7 +162,7 @@ function ProjectView(props: any) {
           </Typography>
           <Typography variant="h6">
             {project.likedBy.map((user, key) => {
-              return <div>{user}</div>;
+              return <Avatar style={{margin: "5px"}}>{(user[0] + user[1]).toUpperCase()}</Avatar>;
             })}
           </Typography>
           <Grid container>

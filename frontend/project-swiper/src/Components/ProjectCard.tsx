@@ -142,7 +142,16 @@ export default function ProjectCard(props: any) {
           </Stack>
           <Divider style={{ padding: "5px" }}></Divider>
           <Typography variant="h6">Ressources</Typography>
-          <Typography>{project.resources.map((r, key) => <a href={r}>{r}</a>)}</Typography>
+          <Typography>
+            {project.resources.map((r, key) => {
+              return (
+                <div>
+                  <a href={r}>{r}</a>
+                  <br />
+                </div>
+              );
+            })}
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={registerInterest}>Register Interest</Button>
