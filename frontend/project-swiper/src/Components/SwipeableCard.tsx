@@ -22,29 +22,14 @@ function getDirection(swiperEvent: any): DIRECTION {
   }
 }
 
-export default function SwipeableCard() {
+export default function SwipeableCard(props: any) {
+  const project: Project = props.project;
   const [direction, setDirection] = useState(DIRECTION.UNKNOWN);
-  const dummy_project: Project = {
-    title: "The Spottify Project",
-    description: "A little description about the project and how it will help you understand the fundamentals of x technology and y engineering principles.",
-    date: new Date().toISOString().split("T")[0],
-    languages: ["Python", "Java", "Rust"],
-    tags: ["Fullstack", "WebApp"],
-    contributor_ids: [],
-    learning_outcomes: ["Web Development", "Collaboration", "Team-building", "Pair-programming", "Scripting", "Database Management"],
-    why_join: "We're a friendly Team with much to teach and much to learn. +We'd love to take onboard a mentee to see this project through!",
-    duration: 20,
-    hours: 20,
-    likedBy: [],
-    owner_id: "0KOlZSoDTsnHVQUAfcwV",
-    resources: [],
-  };
   return (
     <Swiper slidesPerView={1} onSliderMove={(move) => setDirection(getDirection(move))}>
       <SwiperSlide>
-        <ProjectCard project={dummy_project} popover={true}/>
+        <ProjectCard project={project} popover={true}/>
       </SwiperSlide>
-      {direction}
     </Swiper>
   );
 }
