@@ -13,9 +13,13 @@ export default function UserProfilePage() {
   });
 
   return (
-    <div>
+    <div className="container" style={{ marginTop: "20px" }}>
       {/* TODO: replace by spinner for loading */}
-      {loading && <div>Loading</div>}
+      {loading && (
+        <div className="text-center">
+          <div className="spinner-grow" role="status"></div>
+        </div>
+      )}
       {!loading && <UserProfile user={user} />}
     </div>
   );
