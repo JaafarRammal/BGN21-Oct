@@ -15,7 +15,7 @@ export default function ExplorePage() {
   }, []);
 
   return (
-    <div className="container" style={{ paddingTop: "20px" }}>
+    <div className="container" style={{ paddingTop: "20px", paddingBottom: "20px" }}>
       {!loading && (
         <Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={2}>
           {projects.map((project, index) => (

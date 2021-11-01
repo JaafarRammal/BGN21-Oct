@@ -18,6 +18,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import CloseIcon from "@mui/icons-material/Close";
 import { Project } from "../Helpers/Project";
+import { getCurrentUserID, likeProject } from "../Helpers/Firebase";
 
 export default function ProjectCard(props: any) {
   const project: Project = props.project;
@@ -44,8 +45,8 @@ export default function ProjectCard(props: any) {
   });
 
   const registerInterest = () => {
-    console.log("RegisterInterest: ", project.title);
     // Do some animation or add to saved project list
+    likeProject(getCurrentUserID(), project.id);
     handleClose();
   };
 
@@ -76,7 +77,7 @@ export default function ProjectCard(props: any) {
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              R
+              {project.title[0]}
             </Avatar>
           }
           action={
@@ -87,13 +88,15 @@ export default function ProjectCard(props: any) {
           title={project.title}
           subheader={project.date}
         />
-        <CardMedia component="img" height="194" image={logo} style={{ maxWidth: "500px" }} />
+        <CardMedia component="img" height="194" image={project.picture ?? logo} style={{ maxWidth: "500px" }} />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             {project.description}
           </Typography>
-          <Stack direction="row" spacing={0.5}>
+          <Stack direction="row" spacing={0.5} style={{ margin: "5px 0px" }}>
             {Languages}
+          </Stack>
+          <Stack direction="row" spacing={0.5}>
             {Tags}
           </Stack>
         </CardContent>
@@ -137,6 +140,9 @@ export default function ProjectCard(props: any) {
               {Tags}
             </Stack>
           </Stack>
+          <Divider style={{ padding: "5px" }}></Divider>
+          <Typography variant="h6">Ressources</Typography>
+          <Typography>{project.resources.map((r, key) => <a href={r}>{r}</a>)}</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={registerInterest}>Register Interest</Button>

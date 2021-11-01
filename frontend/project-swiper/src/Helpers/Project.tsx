@@ -12,4 +12,6 @@ export interface Project {
   title: string;
   why_join: string;
   date: string;
+  picture: string;
+  id: string;
 }

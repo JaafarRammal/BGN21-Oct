@@ -6,7 +6,7 @@ import { Project } from "./Project";
 export function getCurrentUserID(): string {
   var currentUser = localStorage.getItem("userid");
   if (currentUser === null) {
-    currentUser = "p4lQAAutGvrjxxayXq2K";
+    currentUser = "2402eyybBfaxGDbfhOfi";
     setCurrentUserID(currentUser);
   }
   return currentUser;
@@ -56,8 +56,39 @@ export const getUserFeed = function (userID: string): Promise<Project[]> {
     fetch("https://us-central1-bgn-hack21-7006.cloudfunctions.net/user/" + userID).then((data) =>
       data
         .json()
-        .then((projects) => resolve(projects))
+        .then((projects) => {
+          resolve(projects);
+          projects.forEach((p: any) => console.log(p.id));
+        })
         .catch((error) => reject(error))
     );
   });
 };
+
+export const likeProject = function (userID: string, projectID: string): Promise<Boolean> {
+  return new Promise<Boolean>((resolve, reject) => {
+    fetch("https://us-central1-bgn-hack21-7006.cloudfunctions.net/user/like/" + userID + "/" + projectID, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((_) => resolve(true))
+      .catch((_) => reject(false));
+  });
+};
+
+
+export const dislikeProject = function (userID: string, projectID: string): Promise<Boolean> {
+  return new Promise<Boolean>((resolve, reject) => {
+    fetch("https://us-central1-bgn-hack21-7006.cloudfunctions.net/user/dislike/" + userID + "/" + projectID, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((_) => resolve(true))
+      .catch((_) => reject(false));
+  });
+};
+
