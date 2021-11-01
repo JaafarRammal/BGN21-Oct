@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ProjectCard from "../Components/ProjectCard";
+import { getCurrentUserID, likeProject } from "../Helpers/Firebase";
 import { Project } from "../Helpers/Project";
 
 enum DIRECTION {
@@ -26,9 +27,16 @@ export default function SwipeableCard(props: any) {
   const project: Project = props.project;
   const [direction, setDirection] = useState(DIRECTION.UNKNOWN);
   return (
-    <Swiper slidesPerView={1} onSliderMove={(move) => setDirection(getDirection(move))}>
+    <Swiper
+      slidesPerView={1}
+      onSliderMove={(move) => {
+        setDirection(getDirection(move));
+        if (getDirection(move) === DIRECTION.RIGHT) likeProject(getCurrentUserID(), project.id);
+        console.log(getDirection(move) === DIRECTION.RIGHT)
+      }}
+    >
       <SwiperSlide>
-        <ProjectCard project={project} popover={true}/>
+        <ProjectCard project={project} popover={true} />
       </SwiperSlide>
     </Swiper>
   );
