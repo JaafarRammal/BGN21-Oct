@@ -1,12 +1,19 @@
 import { db } from "./firebase.config";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { User } from "./User";
 import { Project } from "./Project";
 
-// function to return the user ID logged in
-// hardcoded for now
 export function getCurrentUserID(): string {
-  return "p4lQAAutGvrjxxayXq2K";
+  var currentUser = localStorage.getItem("userid");
+  if (currentUser === null) {
+    currentUser = "p4lQAAutGvrjxxayXq2K";
+    setCurrentUserID(currentUser);
+  }
+  return currentUser;
+}
+
+export function setCurrentUserID(id: string) {
+  localStorage.setItem("userid", id);
 }
 
 export const getUser = function (userID: string): Promise<User> {
@@ -26,6 +33,19 @@ export const getProject = function (projectID: string): Promise<Project> {
     getDoc(projectRef)
       .then((data) => {
         data.exists() ? resolve(data.data() as Project) : reject("Record does not exist");
+      })
+      .catch((error) => reject(error));
+  });
+};
+
+export const getAllUsers = function (): Promise<{ [id: string]: User }> {
+  return new Promise<{ [id: string]: User }>((resolve, reject) => {
+    const usersRef = collection(db, "users");
+    var out: { [id: string]: User } = {};
+    getDocs(usersRef)
+      .then((data) => {
+        data.forEach((doc) => (out[doc.id] = doc.data() as User));
+        resolve(out);
       })
       .catch((error) => reject(error));
   });

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getCurrentUserID, getProject, getUser } from "../Helpers/Firebase";
 import { Project } from "../Helpers/Project";
 import Accordion from "@mui/material/Accordion";
@@ -14,28 +14,30 @@ export default function MyProjectsPage() {
   const [joinedProjects, setJoinedProjects] = useState<{ [id: string]: Project }>({});
   const [likedProjects, setLikedProjects] = useState<{ [id: string]: Project }>({});
 
-  getUser(getCurrentUserID()).then((data) => {
-    const ownedArray: { [id: string]: Project } = {};
-    const joinedArray: { [id: string]: Project } = {};
-    const likedArray: { [id: string]: Project } = {};
-    const promises: Promise<any>[] = [];
-    data.ownedProjects.forEach((id) => {
-      promises.push(getProject(id).then((project) => (ownedArray[id] = project)));
-    });
-    data.joinedProjects.forEach((id) => {
-      promises.push(getProject(id).then((project) => (joinedArray[id] = project)));
-    });
-    data.likedProjects.forEach((id) => {
-      promises.push(getProject(id).then((project) => (likedArray[id] = project)));
-    });
+  useEffect(() => {
+    getUser(getCurrentUserID()).then((data) => {
+      const ownedArray: { [id: string]: Project } = {};
+      const joinedArray: { [id: string]: Project } = {};
+      const likedArray: { [id: string]: Project } = {};
+      const promises: Promise<any>[] = [];
+      data.ownedProjects.forEach((id) => {
+        promises.push(getProject(id).then((project) => (ownedArray[id] = project)));
+      });
+      data.joinedProjects.forEach((id) => {
+        promises.push(getProject(id).then((project) => (joinedArray[id] = project)));
+      });
+      data.likedProjects.forEach((id) => {
+        promises.push(getProject(id).then((project) => (likedArray[id] = project)));
+      });
 
-    Promise.all(promises).then((_) => {
-      setOwnedProjects(ownedArray);
-      setLikedProjects(likedArray);
-      setJoinedProjects(joinedArray);
-      setLoading(false);
+      Promise.all(promises).then((_) => {
+        setOwnedProjects(ownedArray);
+        setLikedProjects(likedArray);
+        setJoinedProjects(joinedArray);
+        setLoading(false);
+      });
     });
-  });
+  }, []);
 
   return (
     <div className="container" style={{ paddingTop: "20px" }}>
@@ -73,11 +75,7 @@ function ProjectsCollapse(props: any) {
               </div>
             );
           })}
-          {Object.keys(projects).length === 0 && (
-            <div className="col-lg-6 text-secondary">
-              No projects to show!
-            </div>
-          )}
+          {Object.keys(projects).length === 0 && <div className="col-lg-6 text-secondary">No projects to show!</div>}
         </div>
       </AccordionDetails>
     </Accordion>
