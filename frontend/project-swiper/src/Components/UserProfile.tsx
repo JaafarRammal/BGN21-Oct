@@ -5,8 +5,8 @@ export default function UserProfile(props: any) {
   return (
     <Card sx={{ maxWidth: 500 }} className="container" style={{ marginTop: "20px" }}>
       <CardContent style={{ alignItems: "center" }}>
-        <Avatar sx={{ height: "100px", width: "100px", margin: "0 auto", fontSize: "45px" }}>{(user.firstName[0] + user.secondName[0]).toUpperCase()}</Avatar>
-        <Typography style={{paddingTop: "20px", textAlign: "center", }} variant="h4">{user.firstName + " " + user.secondName}</Typography>
+        <Avatar sx={{ height: "100px", width: "100px", margin: "0 auto", fontSize: "45px" }}>{(user.firstName[0] + user.lastName[0]).toUpperCase()}</Avatar>
+        <Typography style={{paddingTop: "20px", textAlign: "center", }} variant="h4">{user.firstName + " " + user.lastName}</Typography>
         <Typography style={{paddingTop: "20px" }} variant="h6">Stats</Typography>
         <Typography>Owned Projects: {user.ownedProjects.length}</Typography>
         <Typography>Joined Projects: {user.joinedProjects.length}</Typography>

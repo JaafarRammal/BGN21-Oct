@@ -4,7 +4,7 @@ export interface User {
   hours: number,
   languages: string[],
   likedProjects: string[],
-  secondName: string,
+  lastName: string,
   tags: string[],
   ownedProjects: string[],
   joinedProjects: string[]
