@@ -53,6 +53,11 @@ export const getAllUsers = function (): Promise<{ [id: string]: User }> {
 
 export const getUserFeed = function (userID: string): Promise<Project[]> {
   return new Promise<Project[]>((resolve, reject) => {
-    fetch("https://us-central1-bgn-hack21-7006.cloudfunctions.net/user/" + userID).then((data) => console.log(data));
+    fetch("https://us-central1-bgn-hack21-7006.cloudfunctions.net/user/" + userID).then((data) =>
+      data
+        .json()
+        .then((projects) => resolve(projects))
+        .catch((error) => reject(error))
+    );
   });
 };
