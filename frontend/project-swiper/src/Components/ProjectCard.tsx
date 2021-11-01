@@ -72,7 +72,7 @@ export default function ProjectCard(props: any) {
 
   return (
     <div>
-      <Card sx={{ maxWidth: 500 }} onClick={handleClickOpen}>
+      <Card sx={{ width: window.innerWidth - 80, maxWidth: 500 }} onClick={handleClickOpen}>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
